@@ -412,7 +412,12 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
 
             // Shutter callback occurs after the image is captured. This can
             // be used to trigger a sound to let the user know that image is taken
-            Camera.ShutterCallback shutterCallback = null;
+            Camera.ShutterCallback shutterCallback = new Camera.ShutterCallback() {
+                public void onShutter() {
+                    // シャッター音を鳴らすために空でも良いのでコールバックを指定する必要がある
+                    // 参考: http://qiita.com/Klein/items/94d6affc916a555203fe
+                }
+            };
 
             // Raw callback occurs when the raw image data is available
             Camera.PictureCallback raw = null;
