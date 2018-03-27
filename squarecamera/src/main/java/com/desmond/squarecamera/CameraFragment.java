@@ -498,15 +498,7 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         int rotation = getPhotoRotation();
 //        Log.d(TAG, "normal orientation: " + orientation);
 //        Log.d(TAG, "Rotate Picture by: " + rotation);
-        getFragmentManager()
-                .beginTransaction()
-                .replace(
-                        R.id.fragment_container,
-                        EditSavePhotoFragment.newInstance(data, rotation, mImageParameters.createCopy()),
-                        EditSavePhotoFragment.TAG)
-                .addToBackStack(null)
-                .commit();
-
+        showsEditSavePhotoFragment(data, camera, rotation);
         setSafeToTakePhoto(true);
     }
 
@@ -523,6 +515,17 @@ public class CameraFragment extends Fragment implements SurfaceHolder.Callback, 
         }
 
         return rotation;
+    }
+
+    protected void showsEditSavePhotoFragment(byte[] data, Camera camera, int rotation) {
+        getFragmentManager()
+                .beginTransaction()
+                .replace(
+                        R.id.fragment_container,
+                        EditSavePhotoFragment.newInstance(data, rotation, mImageParameters.createCopy()),
+                        EditSavePhotoFragment.TAG)
+                .addToBackStack(null)
+                .commit();
     }
 
     /**
